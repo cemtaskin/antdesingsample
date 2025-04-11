@@ -1,12 +1,20 @@
 import { Select, Space, Table, Tag } from "antd";
 
 const StudentList = ({ students }) => {
-  console.log(students);
+  const distinctDepartments = [
+    ...new Set(students.map((item) => item.department)),
+  ];
+
+  console.log(distinctDepartments);
   const getTitle = () => {
     return (
       <Space>
+        Department
         <Select style={{ width: 150 }}>
-          <Select.Option>CE</Select.Option>
+          <Select.Option value="0">All Departments</Select.Option>
+          {distinctDepartments.map((item) => (
+            <Select.Option value={item}>{item}</Select.Option>
+          ))}
         </Select>
         Student List : <Tag color="blue">{students.length}</Tag>
       </Space>
